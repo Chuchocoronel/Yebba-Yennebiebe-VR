@@ -7,12 +7,21 @@ public class EnemyMovement : MonoBehaviour
 {
     NavMeshAgent agent;
 
-    public GameObject target;
+    private GameObject target;
     // Start is called before the first frame update
     void Start()
     {
+        target = GameObject.Find("Player");
         agent = gameObject.GetComponent<NavMeshAgent>();
-        agent.stoppingDistance = 6.0f;
+        agent.stoppingDistance = 1.0f;
         agent.destination = target.transform.position;
+    }
+
+    private void Update()
+    {
+        if (agent.destination != target.transform.position)
+        {
+            agent.destination = target.transform.position;
+        }
     }
 }
