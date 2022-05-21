@@ -43,7 +43,6 @@ public class PlayerController : MonoBehaviour
     public void PlayerDead()
     {
         // Do animations here, etc...
-        GetComponent<Rigidbody>().AddForce(Vector3.up * 500.0f);
     }
 
     private void OnTriggerEnter(Collider other)

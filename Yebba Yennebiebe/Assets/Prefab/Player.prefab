@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2443498114577260812}
   - component: {fileID: 632447118994802284}
   - component: {fileID: 2523051646653728247}
+  - component: {fileID: 269155517830728852}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -61,7 +62,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: e8f721c9e2a8dec4da4258c7237e29f9, type: 2}
+  - {fileID: 2100000, guid: 535cfd0b44ad7c448827ba4b9d5e0458, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -96,3 +97,21 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &269155517830728852
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5898624575755362296}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc706acf7f991c846b28b98fa61c38c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gemManager: {fileID: 0}
+  hitPoints: 3
+  fire: {fileID: 8430994396792441890, guid: da9c45ce4f93c4246af2af72d0c1f784, type: 3}
+  water: {fileID: 8430994396792441890, guid: da9c45ce4f93c4246af2af72d0c1f784, type: 3}
+  electric: {fileID: 8430994396792441890, guid: da9c45ce4f93c4246af2af72d0c1f784,
+    type: 3}

@@ -22,9 +22,9 @@ public class GemManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //SpawnGem(type.FIREGEM);
-        //SpawnGem(type.WATERGEM);
-        //SpawnGem(type.ELECTRICGEM);   
+        SpawnGem(type.FIREGEM);
+        SpawnGem(type.WATERGEM);
+        SpawnGem(type.ELECTRICGEM);
     }
 
     // Update is called once per frame

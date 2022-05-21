@@ -35,7 +35,9 @@ public class EnemyManager : MonoBehaviour
             GameObject enemySpawned = Instantiate(enemy);
             do
             {
-                enemySpawned.transform.position = new Vector3(Random.Range(-30.0f, 30.0f), 50.0f, Random.Range(-30.0f, 30.0f));
+                float x = gameObject.transform.position.x;
+                float z = gameObject.transform.position.z;
+                enemySpawned.transform.position = new Vector3(Random.Range(x - 30.0f, x + 30.0f), 1.0f, Random.Range(z - 30.0f, z + 30.0f));
             } while ((enemySpawned.transform.position - player.transform.position).magnitude <= 20.0f);
         }
     }
