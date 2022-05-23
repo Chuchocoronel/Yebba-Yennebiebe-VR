@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.XR;
 using UnityEngine;
 
 public class EnemyManager : MonoBehaviour
@@ -23,7 +24,7 @@ public class EnemyManager : MonoBehaviour
             spawnRate = 5.0f;
         }
         {
-            Debug.Log("Time left to spawn" + spawnRate);
+            //Debug.Log("Time left to spawn" + spawnRate);
             spawnRate -= Time.deltaTime;
         }
     }
