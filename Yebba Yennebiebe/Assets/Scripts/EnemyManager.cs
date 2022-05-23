@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemyManager : MonoBehaviour
 {
-    public GameObject enemy;
+    public GameObject[] enemy;
     public GameObject player;
     private float spawnRate = 5.0f;
     private int spawnQuantity = 5;
@@ -22,8 +22,8 @@ public class EnemyManager : MonoBehaviour
             SpawnEnemy();
             spawnRate = 5.0f;
         }
+        else
         {
-            Debug.Log("Time left to spawn" + spawnRate);
             spawnRate -= Time.deltaTime;
         }
     }
@@ -32,7 +32,8 @@ public class EnemyManager : MonoBehaviour
     {
         for (int i = 0; i < spawnQuantity; ++i)
         {
-            GameObject enemySpawned = Instantiate(enemy);
+            int random = Random.Range(0, 2);
+            GameObject enemySpawned = Instantiate(enemy[random]);
             do
             {
                 float x = gameObject.transform.position.x;

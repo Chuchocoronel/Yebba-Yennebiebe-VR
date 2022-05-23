@@ -34,10 +34,10 @@ public class PlayerController : MonoBehaviour
     {
         // TODO: Input to throw magic in VR
 
-        if (Input.GetKeyUp(KeyCode.Space))
-        {
-            Instantiate(fire, this.transform);
-        }
+        //if (Input.GetKeyUp(KeyCode.Space))
+        //{
+        //    Instantiate(fire, this.transform);
+        //}
     }
 
     public void PlayerDead()
