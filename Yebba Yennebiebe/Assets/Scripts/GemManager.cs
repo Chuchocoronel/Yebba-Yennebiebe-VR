@@ -37,13 +37,13 @@ public class GemManager : MonoBehaviour
         switch (gem)
         {
             case type.FIREGEM:
-                Instantiate(fireGem, fireSpawner);
+                Instantiate(fireGem, fireSpawner.position, Quaternion.identity);
                 break;
             case type.WATERGEM:
-                Instantiate(waterGem, waterSpawner);
+                Instantiate(waterGem, waterSpawner.position, Quaternion.identity);
                 break;
             case type.ELECTRICGEM:
-                Instantiate(electricGem, electricSpawner);
+                Instantiate(electricGem, electricSpawner.position, Quaternion.identity);
                 break;
             default:
                 break;

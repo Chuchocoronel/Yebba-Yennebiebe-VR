@@ -22,6 +22,10 @@ public class PlayerController : MonoBehaviour
     public GameObject fire;
     public GameObject water;
     public GameObject electric;
+    public GameObject bullet;
+    public Transform bulletSpawnPoint;
+
+    public bool backTouched = false;
 
     // Start is called before the first frame update
     void Start()
@@ -32,6 +36,14 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (backTouched)
+        {
+            Debug.Log("SHOOTING");
+            Instantiate(bullet, bulletSpawnPoint.position, Quaternion.identity);
+            //b.transform.position += transform.forward * 50;
+            backTouched = false;
+        }
+
         // TODO: Input to throw magic in VR
 
         //if (Input.GetKeyUp(KeyCode.Space))
@@ -63,4 +75,5 @@ public class PlayerController : MonoBehaviour
             gemManager.SpawnGem(GemManager.type.ELECTRICGEM);
         }
     }
+
 }
