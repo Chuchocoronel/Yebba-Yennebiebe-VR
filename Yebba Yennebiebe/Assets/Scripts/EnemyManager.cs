@@ -20,7 +20,7 @@ public class EnemyManager : MonoBehaviour
     {
         if (spawnRate <= 0.0f)
         {
-            SpawnEnemy();
+            //SpawnEnemy();
             spawnRate = 5.0f;
         }
         {

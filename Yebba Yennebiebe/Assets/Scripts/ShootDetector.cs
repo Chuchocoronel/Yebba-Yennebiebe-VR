@@ -19,9 +19,14 @@ public class ShootDetector : MonoBehaviour
 
     void OnTriggerEnter(Collider collision)
     {
-        if (collision.gameObject.tag == "Hand")
+        if (collision.gameObject.tag == "LeftHand")
         {
-            playerScript.backTouched = true;
+            playerScript.leftBackTouched = true;
+            Debug.Log("TOUCHEED");
+        }
+        if (collision.gameObject.tag == "RightHand")
+        {
+            playerScript.rightBackTouched = true;
             Debug.Log("TOUCHEED");
         }
     }

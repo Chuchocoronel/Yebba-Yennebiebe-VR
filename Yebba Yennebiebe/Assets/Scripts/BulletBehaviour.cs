@@ -10,7 +10,7 @@ public class BulletBehaviour : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         //rb.velocity = new Vector3(0, 0, 500);
-        rb.AddForce(new Vector3(0, 1000, 0));
+        //rb.AddForce(new Vector3(0, 1000, 0));
     }
 
     // Update is called once per frame
@@ -21,7 +21,7 @@ public class BulletBehaviour : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == "Hand")
+        if (collision.gameObject.tag == "LeftHand" || collision.gameObject.tag == "RightHand")
             return;
         Debug.Log("Destroyed bullet");
         Destroy(gameObject);

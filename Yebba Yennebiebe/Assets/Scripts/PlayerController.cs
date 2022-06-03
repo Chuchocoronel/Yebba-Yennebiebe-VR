@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.XR;
 
 public class PlayerController : MonoBehaviour
 {
@@ -23,33 +24,60 @@ public class PlayerController : MonoBehaviour
     public GameObject water;
     public GameObject electric;
     public GameObject bullet;
+    public GameObject leftHand;
+    public GameObject rightHand;
     public Transform bulletSpawnPoint;
 
-    public bool backTouched = false;
+    public bool leftBackTouched = false;
+    public bool rightBackTouched = false;
+
+    InputDevice leftDevice;
+    InputDevice rightDevice;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        List<InputDevice> leftGameControllers = new List<InputDevice>();
+        InputDeviceCharacteristics leftCharacteristics = InputDeviceCharacteristics.Left | InputDeviceCharacteristics.Controller;
+        InputDevices.GetDevicesWithCharacteristics(leftCharacteristics, leftGameControllers);
+
+        foreach (var device in leftGameControllers)
+        {
+            Debug.Log(string.Format("Device name '{0}' has role '{1}'", device.name, device.role.ToString()));
+        }
+
+        leftDevice = leftGameControllers[0];
+
+        List<InputDevice> rightGameControllers = new List<InputDevice>();
+        InputDeviceCharacteristics rightCharacteristics = InputDeviceCharacteristics.Right | InputDeviceCharacteristics.Controller;
+        InputDevices.GetDevicesWithCharacteristics(rightCharacteristics, rightGameControllers);
+
+        rightDevice = rightGameControllers[0];
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (backTouched)
+        leftDevice.TryGetFeatureValue(CommonUsages.trigger, out float leftTrigger);
+        if (leftTrigger <= 0.1f) leftBackTouched = false;
+        else if (leftTrigger > 0.1f && !leftBackTouched)
         {
             Debug.Log("SHOOTING");
-            Instantiate(bullet, bulletSpawnPoint.position, Quaternion.identity);
-            //b.transform.position += transform.forward * 50;
-            backTouched = false;
+            GameObject go = Instantiate(bullet, leftHand.transform.position, Quaternion.identity);
+
+            go.GetComponent<Rigidbody>().AddForce(leftHand.transform.forward * 1200.0f);
+            leftBackTouched = true;
         }
+        rightDevice.TryGetFeatureValue(CommonUsages.trigger, out float rightTrigger);
+        if (rightTrigger <= 0.1f) rightBackTouched = false;
+        else if (rightTrigger > 0.1f && !rightBackTouched)
+        {
+            Debug.Log("SHOOTING");
+            GameObject go = Instantiate(bullet, rightHand.transform.position, Quaternion.identity);
 
-        // TODO: Input to throw magic in VR
-
-        //if (Input.GetKeyUp(KeyCode.Space))
-        //{
-        //    Instantiate(fire, this.transform);
-        //}
+            go.GetComponent<Rigidbody>().AddForce(rightHand.transform.forward * 1200.0f);
+            rightBackTouched = true;
+        }
     }
 
     public void PlayerDead()

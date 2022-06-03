@@ -8,6 +8,8 @@ TagManager:
   - Trail
   - BackShoot
   - Hand
+  - LeftHand
+  - RightHand
   layers:
   - Default
   - TransparentFX
