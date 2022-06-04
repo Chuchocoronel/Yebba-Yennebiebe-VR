@@ -13,7 +13,7 @@ public class EnemyMovement : MonoBehaviour
     {
         target = GameObject.Find("Player");
         agent = gameObject.GetComponent<NavMeshAgent>();
-        agent.stoppingDistance = 1.0f;
+        agent.stoppingDistance = 1.5f;
         agent.destination = target.transform.position;
     }
 

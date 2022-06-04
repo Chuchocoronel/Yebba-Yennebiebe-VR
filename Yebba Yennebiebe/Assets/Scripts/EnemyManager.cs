@@ -5,10 +5,12 @@ using UnityEngine;
 
 public class EnemyManager : MonoBehaviour
 {
-    public GameObject enemy;
+    public GameObject[] enemies;
     public GameObject player;
     private float spawnRate = 5.0f;
     private int spawnQuantity = 5;
+   // private int currentEnemyCount = 0;
+  //  private int maxEnemies = 10;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,7 +22,7 @@ public class EnemyManager : MonoBehaviour
     {
         if (spawnRate <= 0.0f)
         {
-            //SpawnEnemy();
+            SpawnEnemy();
             spawnRate = 5.0f;
         }
         {
@@ -33,7 +35,9 @@ public class EnemyManager : MonoBehaviour
     {
         for (int i = 0; i < spawnQuantity; ++i)
         {
-            GameObject enemySpawned = Instantiate(enemy);
+            int randNum = Random.Range(0, 2);
+            GameObject enemySpawned = Instantiate(enemies[randNum]);
+          //  currentEnemyCount++;
             do
             {
                 float x = gameObject.transform.position.x;
