@@ -6,6 +6,7 @@ using UnityEngine;
 public class EnemyMovement : MonoBehaviour
 {
     NavMeshAgent agent;
+    public bool dead = false;
 
     private GameObject target;
     // Start is called before the first frame update
@@ -19,9 +20,13 @@ public class EnemyMovement : MonoBehaviour
 
     private void Update()
     {
-        if (agent.destination != target.transform.position)
+        if (agent.destination != target.transform.position && !dead)
         {
             agent.destination = target.transform.position;
+        }
+        else if (dead)
+        {
+            agent.isStopped = true;
         }
     }
 }

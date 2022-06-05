@@ -117,6 +117,11 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        if (other.name == "Bottle_Endurance")
+        {
+            Debug.Log("Juggernaut");
+            Destroy(other.gameObject);
+        }
     //    if (other.name == "FireGem_Spawner")
     //    {
     //        GripButton(MagicType.FIRE);

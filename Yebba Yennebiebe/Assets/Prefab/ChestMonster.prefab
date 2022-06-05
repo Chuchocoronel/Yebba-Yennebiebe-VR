@@ -349,6 +349,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hitNum: 1
+  particles: {fileID: 8160894364554480771, guid: 5073bd9c78a1b924d84c01adddfb96cd, type: 3}
+  mesh: {fileID: 7744612009563354391}
 --- !u!114 &1774987528982668612
 MonoBehaviour:
   m_ObjectHideFlags: 0
