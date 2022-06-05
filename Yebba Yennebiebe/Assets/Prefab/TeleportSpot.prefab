@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 6932848917164104448}
   - component: {fileID: 6932848917164104455}
   - component: {fileID: 7667094107548864587}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: TeleportSpot
   m_TagString: Untagged
   m_Icon: {fileID: 0}

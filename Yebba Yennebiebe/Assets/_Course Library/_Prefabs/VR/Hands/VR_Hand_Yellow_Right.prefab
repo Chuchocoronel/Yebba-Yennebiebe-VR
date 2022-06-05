@@ -10,7 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 6155391641003262500}
   - component: {fileID: 5820717749950693971}
-  m_Layer: 0
+  - component: {fileID: 8468985318438371763}
+  m_Layer: 8
   m_Name: VR_Hand_Yellow_Right
   m_TagString: RightHand
   m_Icon: {fileID: 0}
@@ -45,6 +46,20 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.08504581, y: 0.16154036, z: 0.26893234}
   m_Center: {x: 0.0029186793, y: 0.012466416, z: 0.00027689338}
+--- !u!114 &8468985318438371763
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5758756702848823750}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d764351d03c2e6468115fb05583fff5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isLeft: 0
+  player: {fileID: 0}
 --- !u!1001 &180805121655404090
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -111,6 +126,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: f35cb61652fd6b14ab1932357338e065, type: 3}
       propertyPath: m_Name
       value: VR_Hand_Yellow
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: f35cb61652fd6b14ab1932357338e065, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f35cb61652fd6b14ab1932357338e065, type: 3}

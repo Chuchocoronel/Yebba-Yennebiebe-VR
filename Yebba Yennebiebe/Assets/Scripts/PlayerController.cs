@@ -5,7 +5,7 @@ using UnityEngine.XR;
 
 public class PlayerController : MonoBehaviour
 {
-    enum MagicType
+    public enum MagicType
     {
         NONE = 0,
         FIRE,
@@ -29,7 +29,10 @@ public class PlayerController : MonoBehaviour
     public Transform bulletSpawnPoint;
 
     public bool leftBackTouched = false;
-    public bool rightBackTouched = false;
+    public bool rightBackTouched = false;    
+    
+    public bool leftGripTouched = false;
+    public bool rightGripTouched = false;
 
     InputDevice leftDevice;
     InputDevice rightDevice;
@@ -68,6 +71,7 @@ public class PlayerController : MonoBehaviour
             go.GetComponent<Rigidbody>().AddForce(leftHand.transform.forward * 1200.0f);
             leftBackTouched = true;
         }
+        
         rightDevice.TryGetFeatureValue(CommonUsages.trigger, out float rightTrigger);
         if (rightTrigger <= 0.1f) rightBackTouched = false;
         else if (rightTrigger > 0.1f && !rightBackTouched)
@@ -85,23 +89,45 @@ public class PlayerController : MonoBehaviour
         // Do animations here, etc...
     }
 
-    private void OnTriggerEnter(Collider other)
+    public void GripButton(MagicType type, bool isLeft)
     {
-        if (other.name == "FireGem_Spawner")
+        if (isLeft)
         {
-            leftHandMagic = MagicType.FIRE;
-            gemManager.SpawnGem(GemManager.type.FIREGEM);
+            leftDevice.TryGetFeatureValue(CommonUsages.grip, out float leftGrip);
+            if (leftGrip <= 0.1f) leftGripTouched = false;
+            else if (leftGrip > 0.1f && !leftGripTouched)
+            {
+                Debug.Log("He tocado el tipo izquierda " + type.ToString());
+                leftHandMagic = type;
+                leftGripTouched = true;
+            }
         }
-        else if (other.name == "WaterGem_Spawner")
+        else
         {
-            leftHandMagic = MagicType.WATER;
-            gemManager.SpawnGem(GemManager.type.WATERGEM);
-        }
-        else if (other.name == "ElectricGem_Spawner")
-        {
-            leftHandMagic = MagicType.ELECTRIC;
-            gemManager.SpawnGem(GemManager.type.ELECTRICGEM);
+            rightDevice.TryGetFeatureValue(CommonUsages.grip, out float rightGrip);
+            if (rightGrip <= 0.1f) rightGripTouched = false;
+            else if (rightGrip > 0.1f && !rightGripTouched)
+            {
+                Debug.Log("He tocado el tipo derecha " + type.ToString());
+                rightHandMagic = type;
+                rightGripTouched = true;
+            }
         }
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+    //    if (other.name == "FireGem_Spawner")
+    //    {
+    //        GripButton(MagicType.FIRE);
+    //    }
+    //    else if (other.name == "WaterGem_Spawner")
+    //    {
+    //        GripButton(MagicType.WATER);
+    //    }
+    //    else if (other.name == "ElectricGem_Spawner")
+    //    {
+    //        GripButton(MagicType.ELECTRIC);
+    //    }
+    }
 }

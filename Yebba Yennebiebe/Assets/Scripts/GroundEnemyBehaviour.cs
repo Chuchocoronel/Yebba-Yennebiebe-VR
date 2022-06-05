@@ -11,6 +11,8 @@ public class GroundEnemyBehaviour : MonoBehaviour
     private PlayerController playerScript;
     private Animator anim;
 
+    bool dead = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -22,9 +24,18 @@ public class GroundEnemyBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!dead)
+        {
+            if (anim.GetCurrentAnimatorStateInfo(0).IsName("Dead") && anim.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f)
+            {
+                Destroy(this.gameObject);
+            }
+            return;
+        }
+        
         if ((this.gameObject.transform.position - player.transform.position).magnitude <= 1.5f && attackCooldown <= 0.0f)
         {
-            // TODO: Play hit animation?
+            // TODO: Play hit animation? ¿Si quieres nos vamos?
             anim.SetTrigger("Attack");
             playerScript.hitPoints--;
             if (playerScript.hitPoints <= 0)
@@ -34,5 +45,11 @@ public class GroundEnemyBehaviour : MonoBehaviour
         }
 
         attackCooldown -= Time.deltaTime;
+    }
+
+    public void Die()
+    {
+        anim.SetTrigger("Dead");
+        dead = true;
     }
 }

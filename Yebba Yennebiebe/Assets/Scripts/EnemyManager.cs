@@ -37,7 +37,7 @@ public class EnemyManager : MonoBehaviour
         {
             int randNum = Random.Range(0, 2);
             GameObject enemySpawned = Instantiate(enemies[randNum]);
-          //  currentEnemyCount++;
+            // currentEnemyCount++;
             do
             {
                 float x = gameObject.transform.position.x;
