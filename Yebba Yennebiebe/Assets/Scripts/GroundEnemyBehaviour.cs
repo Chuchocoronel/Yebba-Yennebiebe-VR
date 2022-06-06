@@ -15,6 +15,7 @@ public class GroundEnemyBehaviour : MonoBehaviour
     private EnemyMovement movement;
     public GameObject mesh;
     private Animator anim;
+    private UIManager uiMan;
 
     // Potions to drop
     public GameObject[] potions;
@@ -30,6 +31,7 @@ public class GroundEnemyBehaviour : MonoBehaviour
         anim = GetComponent<Animator>();
         player = GameObject.Find("Player");
         playerScript = player.GetComponent<PlayerController>();
+        uiMan = GameObject.Find("UI").GetComponent<UIManager>();
     }
 
     // Update is called once per frame
@@ -51,6 +53,18 @@ public class GroundEnemyBehaviour : MonoBehaviour
                     GameObject.Instantiate(particles, this.transform);
                     mesh.SetActive(false);
                     deadOnce = true;
+
+                    // Borrar este codigo y ponerlo en el nuevo sitio si se decide poner en otro sitio cuando se destruye un enemigo
+                    switch (mesh.name)
+                    {
+                        case "Object02":
+                            uiMan.points += 100;
+                            break;
+                        case "ChestMesh":
+                            uiMan.points += 50;
+                            break;
+                    }
+
                     Destroy(this.gameObject, 5.0f);
                 }
             }

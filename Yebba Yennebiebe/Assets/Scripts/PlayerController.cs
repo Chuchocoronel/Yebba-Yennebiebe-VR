@@ -51,9 +51,9 @@ public class PlayerController : MonoBehaviour
     private float doubleTapBonusTimer = 30.0f;
     private bool doubleTap = false;
   
-    private bool teleportActive = false;
-    private float teleportBonusTimer = 30.0f;
-    private float teleportCooldown = 30.0f;
+    public bool teleportActive = false;
+    public float teleportBonusTimer = 30.0f;
+    public float teleportCooldown = 30.0f;
 
     InputDevice leftDevice;
     InputDevice rightDevice;
