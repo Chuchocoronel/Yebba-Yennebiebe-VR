@@ -20,15 +20,15 @@ public class Hand : MonoBehaviour
 
     public void OnCollisionStay(Collision collision)
     {
-        if (collision.gameObject.name == "FireGem_Spawner")
+        if (collision.gameObject.tag == "Fire")
         {
             player.GripButton(PlayerController.MagicType.FIRE, isLeft);
         }
-        else if (collision.gameObject.name == "WaterGem_Spawner")
+        else if (collision.gameObject.name == "Water")
         {
             player.GripButton(PlayerController.MagicType.WATER, isLeft);
         }
-        else if (collision.gameObject.name == "ElectricGem_Spawner")
+        else if (collision.gameObject.name == "Electric")
         {
             player.GripButton(PlayerController.MagicType.ELECTRIC, isLeft);
         }

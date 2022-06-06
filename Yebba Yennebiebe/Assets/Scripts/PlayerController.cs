@@ -17,7 +17,8 @@ public class PlayerController : MonoBehaviour
     MagicType leftHandMagic = MagicType.NONE;
     MagicType rightHandMagic = MagicType.NONE;
     public GemManager gemManager;
-    public int hitPoints = 3;
+    public float hitPoints = 3.0f;
+    public float maxHitPoints = 3.0f;
 
     // Magics
     public GameObject fire;
@@ -33,6 +34,15 @@ public class PlayerController : MonoBehaviour
     
     public bool leftGripTouched = false;
     public bool rightGripTouched = false;
+
+    public bool dead = false;
+
+    public float regenerationCooldown = 4.0f;
+
+    public int leftShootCount = 0;
+    public int rightShootCount = 0;
+
+    public bool doubleTap = false;
 
     InputDevice leftDevice;
     InputDevice rightDevice;
@@ -61,32 +71,70 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (dead)
+        {
+            Destroy(this);
+            return;
+        }
+
         leftDevice.TryGetFeatureValue(CommonUsages.trigger, out float leftTrigger);
-        if (leftTrigger <= 0.1f) leftBackTouched = false;
+        if (leftTrigger <= 0.1f)
+        {
+            leftBackTouched = false;
+            leftShootCount = 0;
+        }
         else if (leftTrigger > 0.1f && !leftBackTouched)
         {
             Debug.Log("SHOOTING");
             GameObject go = Instantiate(bullet, leftHand.transform.position, Quaternion.identity);
+            leftShootCount++;
 
             go.GetComponent<Rigidbody>().AddForce(leftHand.transform.forward * 1200.0f);
             leftBackTouched = true;
+            if (doubleTap && leftShootCount < 2)
+            {
+                leftBackTouched = false;
+            }
         }
         
         rightDevice.TryGetFeatureValue(CommonUsages.trigger, out float rightTrigger);
-        if (rightTrigger <= 0.1f) rightBackTouched = false;
+        if (rightTrigger <= 0.1f)
+        {
+            rightShootCount = 0;
+            rightBackTouched = false;
+        }
         else if (rightTrigger > 0.1f && !rightBackTouched)
         {
             Debug.Log("SHOOTING");
             GameObject go = Instantiate(bullet, rightHand.transform.position, Quaternion.identity);
+            rightShootCount++;
 
             go.GetComponent<Rigidbody>().AddForce(rightHand.transform.forward * 1200.0f);
             rightBackTouched = true;
+            if (doubleTap && rightShootCount < 2)
+            {
+                rightBackTouched = false;
+            }
+        }
+
+        if (hitPoints < maxHitPoints)
+        {
+            regenerationCooldown -= Time.deltaTime;
+            if (regenerationCooldown <= 0.0f)
+            {
+                hitPoints += Time.deltaTime;
+                if (hitPoints >= maxHitPoints)
+                {
+                    hitPoints = maxHitPoints;
+                }
+            }
         }
     }
 
     public void PlayerDead()
     {
         // Do animations here, etc...
+        dead = true;
     }
 
     public void GripButton(MagicType type, bool isLeft)
@@ -120,19 +168,26 @@ public class PlayerController : MonoBehaviour
         if (other.name == "Bottle_Endurance")
         {
             Debug.Log("Juggernaut");
+            maxHitPoints = 5;
             Destroy(other.gameObject);
         }
-    //    if (other.name == "FireGem_Spawner")
-    //    {
-    //        GripButton(MagicType.FIRE);
-    //    }
-    //    else if (other.name == "WaterGem_Spawner")
-    //    {
-    //        GripButton(MagicType.WATER);
-    //    }
-    //    else if (other.name == "ElectricGem_Spawner")
-    //    {
-    //        GripButton(MagicType.ELECTRIC);
-    //    }
+        else if (other.name == "Bottle_DoubleTap")
+        {
+            Debug.Log("Double Tap");
+            doubleTap = true;
+            Destroy(other.gameObject);
+        }
+        //    if (other.name == "FireGem_Spawner")
+        //    {
+        //        GripButton(MagicType.FIRE);
+        //    }
+        //    else if (other.name == "WaterGem_Spawner")
+        //    {
+        //        GripButton(MagicType.WATER);
+        //    }
+        //    else if (other.name == "ElectricGem_Spawner")
+        //    {
+        //        GripButton(MagicType.ELECTRIC);
+        //    }
     }
 }

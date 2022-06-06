@@ -12,6 +12,8 @@ TagManager:
   - RightHand
   - FxTemporaire
   - Enemy
+  - Fire
+  - Electric
   layers:
   - Default
   - TransparentFX

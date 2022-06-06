@@ -52,6 +52,7 @@ public class GroundEnemyBehaviour : MonoBehaviour
             // TODO: Play hit animation? �Si quieres nos vamos?
             anim.SetTrigger("Attack");
             playerScript.hitPoints--;
+            playerScript.regenerationCooldown = 4.0f;
             if (playerScript.hitPoints <= 0)
             {
                 playerScript.PlayerDead();
