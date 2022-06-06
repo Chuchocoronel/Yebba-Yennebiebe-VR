@@ -16,6 +16,9 @@ public class GroundEnemyBehaviour : MonoBehaviour
     public GameObject mesh;
     private Animator anim;
 
+    // Potions to drop
+    public GameObject[] potions;
+
     bool dead = false;
 
     private float countdownDie = 4.0f;
@@ -38,6 +41,13 @@ public class GroundEnemyBehaviour : MonoBehaviour
             {
                 if (!deadOnce)
                 {
+                    float randSpawn = Random.Range(0.0f, 100.0f);
+                    if (randSpawn >= 90.0f)
+                    {
+                        int randPotion = Random.Range(0, 3);
+                        GameObject.Instantiate(potions[randPotion], this.transform.position, Quaternion.identity);
+                    }
+
                     GameObject.Instantiate(particles, this.transform);
                     mesh.SetActive(false);
                     deadOnce = true;

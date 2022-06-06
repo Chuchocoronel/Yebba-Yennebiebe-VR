@@ -42,7 +42,18 @@ public class PlayerController : MonoBehaviour
     public int leftShootCount = 0;
     public int rightShootCount = 0;
 
-    public bool doubleTap = false;
+    // Potions and cooldowns
+    private bool hasBonus = false;
+    private bool juggernautActive = false;
+    private float juggernautBonusTimer = 30.0f;
+   
+    private bool doubleTapActive = false;
+    private float doubleTapBonusTimer = 30.0f;
+    private bool doubleTap = false;
+  
+    private bool teleportActive = false;
+    private float teleportBonusTimer = 30.0f;
+    private float teleportCooldown = 30.0f;
 
     InputDevice leftDevice;
     InputDevice rightDevice;
@@ -129,8 +140,53 @@ public class PlayerController : MonoBehaviour
                 }
             }
         }
+
+        ManageCooldowns();
     }
 
+    private void ManageCooldowns()
+    {
+        if (hasBonus)
+        {
+            if (juggernautActive)
+            {
+                juggernautBonusTimer -= Time.deltaTime;
+
+                if (juggernautBonusTimer <= 0.0f)
+                {
+                    maxHitPoints = 3.0f;
+                    if (hitPoints > 3.0f)
+                    {
+                        hitPoints = 3.0f;
+                    }
+                    juggernautBonusTimer = 30.0f;
+                    juggernautActive = false;
+                }
+            }
+
+            if (doubleTapActive)
+            {
+                doubleTapBonusTimer -= Time.deltaTime;
+                if (doubleTapBonusTimer <= 0.0f)
+                {
+                    doubleTapActive = false;
+                    doubleTapBonusTimer = 30.0f;
+                    doubleTap = false;
+                }
+            }
+
+            if (teleportActive)
+            {
+                teleportBonusTimer -= Time.deltaTime;
+                if (teleportBonusTimer <= 0.0f)
+                {
+                    teleportActive = false;
+                    teleportBonusTimer = 30.0f;
+                    teleportCooldown = 30.0f;
+                }
+            }
+        }
+    }
     public void PlayerDead()
     {
         // Do animations here, etc...
@@ -165,16 +221,25 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.name == "Bottle_Endurance")
+        if (other.tag == "Juggernaut")
         {
             Debug.Log("Juggernaut");
-            maxHitPoints = 5;
+            maxHitPoints = 5.0f;
+            juggernautActive = true;
             Destroy(other.gameObject);
         }
-        else if (other.name == "Bottle_DoubleTap")
+        if (other.tag == "DoubleTap")
         {
             Debug.Log("Double Tap");
+            doubleTapActive = true;
             doubleTap = true;
+            Destroy(other.gameObject);
+        }
+        if (other.tag == "Teleport")
+        {
+            Debug.Log("Teleport Fast");
+            teleportActive = true;
+            teleportCooldown = 7.5f;
             Destroy(other.gameObject);
         }
         //    if (other.name == "FireGem_Spawner")

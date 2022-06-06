@@ -107,6 +107,10 @@ MonoBehaviour:
   hitNum: 1
   particles: {fileID: 4963350621844498357, guid: f6856bcf9fc669c4daaef06add143f34, type: 3}
   mesh: {fileID: 1442192043924563074}
+  potions:
+  - {fileID: 1000013317980782, guid: 2cf6690298568294cb6b655c0a3aeb87, type: 3}
+  - {fileID: 1000013846074356, guid: 11e31a2ebb4e6e246bcf8c0ba034a031, type: 3}
+  - {fileID: 1000012970591572, guid: 7cafb89b5a0f61f479d0a748962abbbc, type: 3}
 --- !u!114 &3530674430951318279
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -119,6 +123,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c00681dfbc381ed4388984f43151cd12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dead: 0
 --- !u!1 &1442192043924563074
 GameObject:
   m_ObjectHideFlags: 0
