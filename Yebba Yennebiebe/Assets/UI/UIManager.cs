@@ -30,7 +30,7 @@ public class UIManager : MonoBehaviour
         tpIcon.color = color;
 
         color = blood.color;
-        float lifePercent = 1.0f - (playerController.hitPoints/playerController.maxHitPoints);
+        float lifePercent = 1.0f - (playerController.hitPoints / playerController.maxHitPoints);
         color.a = lifePercent;
         blood.color = color;
     }

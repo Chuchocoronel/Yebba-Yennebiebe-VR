@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -191,6 +192,7 @@ public class PlayerController : MonoBehaviour
     {
         // Do animations here, etc...
         dead = true;
+        SceneManager.LoadScene("Lose");
     }
 
     public void GripButton(MagicType type, bool isLeft)

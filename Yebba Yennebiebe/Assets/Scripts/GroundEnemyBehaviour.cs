@@ -71,23 +71,24 @@ public class GroundEnemyBehaviour : MonoBehaviour
             return;
         }
         
+        
         if ((this.gameObject.transform.position - player.transform.position).magnitude <= 1.5f && attackCooldown <= 0.0f)
         {
-            // TODO: Play hit animation? �Si quieres nos vamos?
+            // TODO: Play hit animation?
             anim.SetTrigger("Attack");
             playerScript.hitPoints--;
             playerScript.regenerationCooldown = 4.0f;
-            if (playerScript.hitPoints <= 0)
+            attackCooldown = 3.0f;
+            if (!playerScript.dead && playerScript.hitPoints <= 0)
             {
-                playerScript.PlayerDead();
+                //playerScript.PlayerDead();
             }
         }
-
+        
         attackCooldown -= Time.deltaTime;
+        //countdownDie -= Time.deltaTime;
 
-        countdownDie -= Time.deltaTime;
-
-        if (countdownDie <= 0.0f) Die();
+        //if (countdownDie <= 0.0f) Die();
     }
 
     public void Die()
