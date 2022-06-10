@@ -45,11 +45,11 @@ public class PlayerController : MonoBehaviour
 
     // Potions and cooldowns
     private bool hasBonus = false;
-    private bool juggernautActive = false;
-    private float juggernautBonusTimer = 30.0f;
+    public bool juggernautActive = false;
+    public float juggernautBonusTimer = 30.0f;
    
-    private bool doubleTapActive = false;
-    private float doubleTapBonusTimer = 30.0f;
+    public bool doubleTapActive = false;
+    public float doubleTapBonusTimer = 30.0f;
     private bool doubleTap = false;
   
     public bool teleportActive = false;
@@ -147,12 +147,10 @@ public class PlayerController : MonoBehaviour
 
     private void ManageCooldowns()
     {
-        if (hasBonus)
-        {
+        //if (hasBonus)
+        //{
             if (juggernautActive)
             {
-                juggernautBonusTimer -= Time.deltaTime;
-
                 if (juggernautBonusTimer <= 0.0f)
                 {
                     maxHitPoints = 3.0f;
@@ -163,30 +161,34 @@ public class PlayerController : MonoBehaviour
                     juggernautBonusTimer = 30.0f;
                     juggernautActive = false;
                 }
+
+                juggernautBonusTimer -= Time.deltaTime;
             }
 
             if (doubleTapActive)
             {
-                doubleTapBonusTimer -= Time.deltaTime;
                 if (doubleTapBonusTimer <= 0.0f)
                 {
                     doubleTapActive = false;
                     doubleTapBonusTimer = 30.0f;
                     doubleTap = false;
                 }
+
+                doubleTapBonusTimer -= Time.deltaTime;
             }
 
             if (teleportActive)
             {
-                teleportBonusTimer -= Time.deltaTime;
                 if (teleportBonusTimer <= 0.0f)
                 {
                     teleportActive = false;
                     teleportBonusTimer = 30.0f;
                     teleportCooldown = 30.0f;
                 }
+
+                teleportBonusTimer -= Time.deltaTime;
             }
-        }
+        //}
     }
     public void PlayerDead()
     {
@@ -242,6 +244,8 @@ public class PlayerController : MonoBehaviour
             Debug.Log("Teleport Fast");
             teleportActive = true;
             teleportCooldown = 7.5f;
+            if (teleportBonusTimer == 30.0f)
+                teleportBonusTimer = 7.5f;
             Destroy(other.gameObject);
         }
         //    if (other.name == "FireGem_Spawner")

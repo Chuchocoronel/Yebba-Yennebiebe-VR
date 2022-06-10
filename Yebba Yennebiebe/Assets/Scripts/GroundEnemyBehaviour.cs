@@ -31,7 +31,7 @@ public class GroundEnemyBehaviour : MonoBehaviour
         anim = GetComponent<Animator>();
         player = GameObject.Find("Player");
         playerScript = player.GetComponent<PlayerController>();
-        uiMan = GameObject.Find("UI").GetComponent<UIManager>();
+        uiMan = GameObject.Find("Canvas").GetComponent<UIManager>();
     }
 
     // Update is called once per frame
