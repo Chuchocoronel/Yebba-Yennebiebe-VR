@@ -17,6 +17,8 @@ TagManager:
   - DoubleTap
   - Juggernaut
   - Teleport
+  - Ground
+  - Ice
   layers:
   - Default
   - TransparentFX

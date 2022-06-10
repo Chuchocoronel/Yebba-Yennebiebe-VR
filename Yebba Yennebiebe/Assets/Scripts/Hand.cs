@@ -18,17 +18,17 @@ public class Hand : MonoBehaviour
         
     }
 
-    public void OnCollisionStay(Collision collision)
+    public void OnTriggerStay(Collider other)
     {
-        if (collision.gameObject.tag == "Fire")
+        if (other.gameObject.tag == "Fire")
         {
             player.GripButton(PlayerController.MagicType.FIRE, isLeft);
         }
-        else if (collision.gameObject.name == "Water")
+        else if (other.gameObject.tag == "Ice")
         {
-            player.GripButton(PlayerController.MagicType.WATER, isLeft);
+            player.GripButton(PlayerController.MagicType.ICE, isLeft);
         }
-        else if (collision.gameObject.name == "Electric")
+        else if (other.gameObject.tag == "Electric")
         {
             player.GripButton(PlayerController.MagicType.ELECTRIC, isLeft);
         }

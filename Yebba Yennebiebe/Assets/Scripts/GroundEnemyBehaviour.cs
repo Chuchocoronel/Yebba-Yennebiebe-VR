@@ -93,8 +93,11 @@ public class GroundEnemyBehaviour : MonoBehaviour
 
     public void Die()
     {
+        if (dead) return;
+
         movement.dead = true;
         anim.SetTrigger("Dead");
+        GetComponent<BoxCollider>().enabled = false;
         dead = true;
     }
 }

@@ -10,7 +10,7 @@ public class PlayerController : MonoBehaviour
     {
         NONE = 0,
         FIRE,
-        WATER,
+        ICE,
         ELECTRIC,
         GRAVITY
     }
@@ -22,12 +22,21 @@ public class PlayerController : MonoBehaviour
     public float maxHitPoints = 3.0f;
 
     // Magics
+    public GameObject fireSpawn;
+    public GameObject iceSpawn;
+
     public GameObject fire;
-    public GameObject water;
+    public GameObject ice;
     public GameObject electric;
-    public GameObject bullet;
     public GameObject leftHand;
     public GameObject rightHand;
+   
+    public GameObject leftMagicSpawner;
+    public GameObject rightMagicSpawner;
+
+    public GameObject leftMagic;
+    public GameObject rightMagic;
+
     public Transform bulletSpawnPoint;
 
     public bool leftBackTouched = false;
@@ -62,6 +71,9 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        leftHandMagic = MagicType.ICE;
+        rightHandMagic = MagicType.FIRE;
+
         List<InputDevice> leftGameControllers = new List<InputDevice>();
         InputDeviceCharacteristics leftCharacteristics = InputDeviceCharacteristics.Left | InputDeviceCharacteristics.Controller;
         InputDevices.GetDevicesWithCharacteristics(leftCharacteristics, leftGameControllers);
@@ -89,6 +101,17 @@ public class PlayerController : MonoBehaviour
             return;
         }
 
+        if (leftMagicSpawner == null && rightMagicSpawner == null)
+        {
+            leftMagicSpawner = GameObject.Find("LeftSpawner");
+            rightMagicSpawner = GameObject.Find("RightSpawner");
+
+            leftMagic = SpawnMagic(leftHandMagic, leftMagicSpawner.transform);
+            leftMagic.transform.parent = leftMagicSpawner.transform;
+            rightMagic = SpawnMagic(rightHandMagic, rightMagicSpawner.transform);
+            rightMagic.transform.parent = rightMagicSpawner.transform;
+        }
+
         leftDevice.TryGetFeatureValue(CommonUsages.trigger, out float leftTrigger);
         if (leftTrigger <= 0.1f)
         {
@@ -98,7 +121,7 @@ public class PlayerController : MonoBehaviour
         else if (leftTrigger > 0.1f && !leftBackTouched)
         {
             Debug.Log("SHOOTING");
-            GameObject go = Instantiate(bullet, leftHand.transform.position, Quaternion.identity);
+            GameObject go = ThrowMagic(leftHandMagic, leftMagicSpawner.transform);
             leftShootCount++;
 
             go.GetComponent<Rigidbody>().AddForce(leftHand.transform.forward * 1200.0f);
@@ -118,7 +141,7 @@ public class PlayerController : MonoBehaviour
         else if (rightTrigger > 0.1f && !rightBackTouched)
         {
             Debug.Log("SHOOTING");
-            GameObject go = Instantiate(bullet, rightHand.transform.position, Quaternion.identity);
+            GameObject go = ThrowMagic(rightHandMagic, rightMagicSpawner.transform);
             rightShootCount++;
 
             go.GetComponent<Rigidbody>().AddForce(rightHand.transform.forward * 1200.0f);
@@ -197,6 +220,32 @@ public class PlayerController : MonoBehaviour
         SceneManager.LoadScene("Lose");
     }
 
+    public GameObject SpawnMagic(MagicType type, Transform transform)
+    {
+        switch (type)
+        {
+            case MagicType.FIRE:
+                return Instantiate(fireSpawn, transform.position, Quaternion.identity);
+            case MagicType.ICE:
+                return Instantiate(iceSpawn, transform.position, Quaternion.identity);
+        }
+
+        return null;
+    }
+
+    public GameObject ThrowMagic(MagicType type, Transform transform)
+    {
+        switch(type)
+        {
+            case MagicType.FIRE:
+                return Instantiate(fire, transform.position, Quaternion.identity);
+            case MagicType.ICE:
+                return Instantiate(ice, transform.position, Quaternion.identity);
+        }
+
+        return null;
+    }
+
     public void GripButton(MagicType type, bool isLeft)
     {
         if (isLeft)
@@ -208,6 +257,9 @@ public class PlayerController : MonoBehaviour
                 Debug.Log("He tocado el tipo izquierda " + type.ToString());
                 leftHandMagic = type;
                 leftGripTouched = true;
+                Destroy(leftMagic);
+                leftMagic = SpawnMagic(leftHandMagic, leftMagicSpawner.transform);
+                leftMagic.transform.parent = leftMagicSpawner.transform;
             }
         }
         else
@@ -219,6 +271,9 @@ public class PlayerController : MonoBehaviour
                 Debug.Log("He tocado el tipo derecha " + type.ToString());
                 rightHandMagic = type;
                 rightGripTouched = true;
+                Destroy(rightMagic);
+                rightMagic = SpawnMagic(rightHandMagic, rightMagicSpawner.transform);
+                rightMagic.transform.parent = rightMagicSpawner.transform;
             }
         }
     }
