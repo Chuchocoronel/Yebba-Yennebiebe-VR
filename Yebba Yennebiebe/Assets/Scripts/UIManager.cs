@@ -15,6 +15,14 @@ public class UIManager : MonoBehaviour
     public Image[] background;
     public Image[] icon;
 
+    // Rounds
+    public Text rounds;
+    private bool newRound = false;
+    private bool colorUpRound = false;
+    private float fadeRound = 2.0f;
+    private float delayRound = 2.0f;
+    private Color roundColor = new Color(1.0f, 1.0f, 1.0f);
+
     // Start is called before the first frame update
     void Start()
     {
@@ -56,8 +64,47 @@ public class UIManager : MonoBehaviour
 
         // BONUSES
         bonusesUI(color);
+
+        // New round
+        if (newRound)
+        {
+            if (!colorUpRound)
+            {
+                
+                fadeRound -= Time.deltaTime;
+                roundColor.g = fadeRound / 2.0f;
+                roundColor.b = fadeRound / 2.0f;
+                rounds.color = roundColor;
+                if (fadeRound <= 0.0f)
+                {
+                    roundColor.g = 0.1f;
+                    roundColor.b = 0.1f;
+                    rounds.color = roundColor;
+                    colorUpRound = true;
+                }
+            }
+            else if (delayRound <= 0.0f)
+            {
+          
+                fadeRound += Time.deltaTime;
+                roundColor.g = fadeRound / 2.0f;
+                roundColor.b = fadeRound / 2.0f;
+                rounds.color = roundColor;
+                if (fadeRound >= 4.0f) newRound = false;
+            }
+            if (fadeRound <= 0.0f) delayRound -= Time.deltaTime;
+        }
+
     }
 
+    public void NewRound(int round)
+    {
+        newRound = true;
+        rounds.text = round.ToString();
+        colorUpRound = false;
+        fadeRound = 2.0f;
+        delayRound = 2.0f;
+    }
     private void bonusesUI(Color color)
     {
         if (playerController.doubleTapActive)

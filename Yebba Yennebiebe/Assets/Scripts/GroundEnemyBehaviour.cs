@@ -9,6 +9,7 @@ public class GroundEnemyBehaviour : MonoBehaviour
     private float attackCooldown = 3.0f;
     private bool deadOnce = false;
 
+    public EnemyManager manager;
     public GameObject particles;
     private GameObject player;
     private PlayerController playerScript;
@@ -27,6 +28,7 @@ public class GroundEnemyBehaviour : MonoBehaviour
     // Start is called before the first frame update
     public void Start()
     {
+        manager = GameObject.Find("EnemyManager").GetComponent<EnemyManager>();
         movement = GetComponent<EnemyMovement>();
         anim = GetComponent<Animator>();
         player = GameObject.Find("Player");
@@ -86,9 +88,13 @@ public class GroundEnemyBehaviour : MonoBehaviour
         }
         
         attackCooldown -= Time.deltaTime;
-        //countdownDie -= Time.deltaTime;
 
-        //if (countdownDie <= 0.0f) Die();
+        // Uncomment this to kill enemies in 4 s
+        //if (!dead)
+        //{
+        //    countdownDie -= Time.deltaTime;
+        //    if (countdownDie <= 0.0f) Die(); 
+        //}
     }
 
     public void Die()
@@ -99,5 +105,6 @@ public class GroundEnemyBehaviour : MonoBehaviour
         anim.SetTrigger("Dead");
         GetComponent<BoxCollider>().enabled = false;
         dead = true;
+        manager.EnemyKilled();
     }
 }
