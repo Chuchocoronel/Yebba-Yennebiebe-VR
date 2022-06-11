@@ -33,7 +33,7 @@ public class EnemyManager : MonoBehaviour
 
     private void SpawnEnemy()
     {
-        for (int i = 0; i < 1; ++i)
+        for (int i = 0; i < spawnQuantity; ++i)
         {
             int randNum = Random.Range(0, 2);
             GameObject enemySpawned = Instantiate(enemies[randNum]);
@@ -42,7 +42,7 @@ public class EnemyManager : MonoBehaviour
             {
                 float x = gameObject.transform.position.x;
                 float z = gameObject.transform.position.z;
-                enemySpawned.transform.position = new Vector3(Random.Range(x - 30.0f, x + 30.0f), 1.0f, Random.Range(z - 30.0f, z + 30.0f));
+                enemySpawned.transform.position = new Vector3(Random.Range(x + 30.0f, x + 90.0f), 1.0f, Random.Range(z - 30.0f, z + 30.0f));
             } while ((enemySpawned.transform.position - player.transform.position).magnitude <= 20.0f);
         }
     }

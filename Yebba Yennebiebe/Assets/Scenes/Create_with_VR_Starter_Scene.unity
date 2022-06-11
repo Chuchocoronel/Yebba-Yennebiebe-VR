@@ -1686,7 +1686,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 505562319}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.1, y: 0.58, z: 17.73}
+  m_LocalPosition: {x: 7.4, y: 0.58, z: 17.562}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 321104943}
@@ -1710,11 +1710,14 @@ MonoBehaviour:
   maxHitPoints: 3
   fireSpawn: {fileID: 5558860960230706801, guid: 6cfc52a592b4f564c87030a79c7637fd, type: 3}
   iceSpawn: {fileID: 6856262578521100248, guid: f13dfa10980bb5b4e9ad3231ea9e34e7, type: 3}
+  electricSpawn: {fileID: 5336243346793681324, guid: 361c60ce19cdbcb4eb267e7fa894f0b6, type: 3}
   fire: {fileID: 947250871755532473, guid: 473d079eb020ad24184a63656bf54144, type: 3}
   ice: {fileID: 7624496878921423553, guid: 7ba892263bec55a45b3073eb74e7dc9a, type: 3}
-  electric: {fileID: 6975157841911099715, guid: 416996fa0e1094d4095473a733029d66, type: 3}
+  electric: {fileID: 2234981197513922153, guid: a24987501acb0b649b8a3922f821aa66, type: 3}
   leftHand: {fileID: 235308782}
   rightHand: {fileID: 474225658}
+  leftMagicSpawner: {fileID: 0}
+  rightMagicSpawner: {fileID: 0}
   leftMagic: {fileID: 0}
   rightMagic: {fileID: 0}
   bulletSpawnPoint: {fileID: 474225659}

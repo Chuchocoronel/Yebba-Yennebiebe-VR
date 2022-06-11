@@ -24,6 +24,7 @@ public class PlayerController : MonoBehaviour
     // Magics
     public GameObject fireSpawn;
     public GameObject iceSpawn;
+    public GameObject electricSpawn;
 
     public GameObject fire;
     public GameObject ice;
@@ -228,6 +229,8 @@ public class PlayerController : MonoBehaviour
                 return Instantiate(fireSpawn, transform.position, Quaternion.identity);
             case MagicType.ICE:
                 return Instantiate(iceSpawn, transform.position, Quaternion.identity);
+            case MagicType.ELECTRIC:
+                return Instantiate(electricSpawn, transform.position, Quaternion.identity);
         }
 
         return null;
@@ -241,6 +244,8 @@ public class PlayerController : MonoBehaviour
                 return Instantiate(fire, transform.position, Quaternion.identity);
             case MagicType.ICE:
                 return Instantiate(ice, transform.position, Quaternion.identity);
+            case MagicType.ELECTRIC:
+                return Instantiate(electric, transform.position, Quaternion.identity);
         }
 
         return null;
