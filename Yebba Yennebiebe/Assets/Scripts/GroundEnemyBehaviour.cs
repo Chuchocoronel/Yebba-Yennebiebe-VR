@@ -25,6 +25,8 @@ public class GroundEnemyBehaviour : MonoBehaviour
 
     private float countdownDie = 4.0f;
 
+    public AudioSource source;
+
     // Start is called before the first frame update
     public void Start()
     {
@@ -60,10 +62,10 @@ public class GroundEnemyBehaviour : MonoBehaviour
                     switch (mesh.name)
                     {
                         case "Object02":
-                            uiMan.points += 100;
+                            ScorePoints.totalPoints += 100;
                             break;
                         case "ChestMesh":
-                            uiMan.points += 50;
+                            ScorePoints.totalPoints += 50;
                             break;
                     }
 
@@ -78,22 +80,18 @@ public class GroundEnemyBehaviour : MonoBehaviour
         {
             // TODO: Play hit animation?
             anim.SetTrigger("Attack");
-            playerScript.hitPoints--;
-            playerScript.regenerationCooldown = 4.0f;
+            // Handling managed in player script when get damaged
+            playerScript.GetHurt(1);
             attackCooldown = 3.0f;
-            if (!playerScript.dead && playerScript.hitPoints <= 0)
-            {
-                //playerScript.PlayerDead();
-            }
         }
         
         attackCooldown -= Time.deltaTime;
 
-        // Uncomment this to kill enemies in 4 s
+        //Uncomment this to kill enemies in 4 s
         //if (!dead)
         //{
         //    countdownDie -= Time.deltaTime;
-        //    if (countdownDie <= 0.0f) Die(); 
+        //    if (countdownDie <= 0.0f) Die();
         //}
     }
 
@@ -101,6 +99,7 @@ public class GroundEnemyBehaviour : MonoBehaviour
     {
         if (dead) return;
 
+        source.Play();
         movement.dead = true;
         anim.SetTrigger("Dead");
         GetComponent<BoxCollider>().enabled = false;

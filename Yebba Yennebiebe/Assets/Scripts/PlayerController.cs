@@ -69,6 +69,9 @@ public class PlayerController : MonoBehaviour
     InputDevice leftDevice;
     InputDevice rightDevice;
 
+    public AudioSource source;
+    public AudioClip[] hurtSounds;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -320,5 +323,19 @@ public class PlayerController : MonoBehaviour
         //    {
         //        GripButton(MagicType.ELECTRIC);
         //    }
+    }
+
+    public void GetHurt(float damage)
+    {
+        source.clip = hurtSounds[Random.Range(0, 1)];
+        source.Play();
+        hitPoints -= damage;
+        regenerationCooldown = 4.0f;
+        if (!dead && hitPoints <= 0)
+        {
+            source.clip = hurtSounds[2];
+            source.Play();
+            //playerScript.PlayerDead();
+        }
     }
 }

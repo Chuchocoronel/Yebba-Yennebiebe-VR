@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
-    public int points = 0;
     public Text pointsText;
     public Image blood;
     public Image tpIcon;
@@ -26,6 +25,8 @@ public class UIManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        ScorePoints.totalPoints = 0;
+
         for (int index = 0; index < 3; index++)
         {
             Color color = cooldownText[index].color;
@@ -46,7 +47,7 @@ public class UIManager : MonoBehaviour
     void Update()
     {
         // POINTS
-        pointsText.text = "Points: " + points;
+        pointsText.text = "Points: " + ScorePoints.totalPoints;
 
         // TP ICON
         Color color = tpIcon.color;
