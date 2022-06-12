@@ -26,7 +26,7 @@ public class BulletBehaviour : MonoBehaviour
     {
         if (other.gameObject.tag == "Enemy")
         {
-            other.gameObject.GetComponent<GroundEnemyBehaviour>().Die();
+            other.gameObject.GetComponent<GroundEnemyBehaviour>().Die(gameObject.tag);
 
             GameObject go = Instantiate(deadParticle);
             go.transform.position = new Vector3(transform.position.x, 0, transform.position.z);
@@ -52,7 +52,7 @@ public class BulletBehaviour : MonoBehaviour
             return;
         if (collision.gameObject.tag == "Enemy")
         {
-            collision.gameObject.GetComponent<GroundEnemyBehaviour>().Die();
+            collision.gameObject.GetComponent<GroundEnemyBehaviour>().Die(gameObject.tag);
         }
 
         Debug.Log("Destroyed bullet");

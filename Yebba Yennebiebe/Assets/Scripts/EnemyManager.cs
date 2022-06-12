@@ -24,7 +24,7 @@ public class EnemyManager : MonoBehaviour
     void Start()
     {
         audioComp = GetComponent<AudioSource>();
-        maxEnemiesRound = 3;
+        maxEnemiesRound = 7;
     }
 
     // Update is called once per frame
@@ -33,7 +33,7 @@ public class EnemyManager : MonoBehaviour
         if (spawnRate <= 0.0f)
         {
             if (currEnemyQuantity < maxEnemiesRound) SpawnEnemy();
-            spawnRate = 2.5f;
+            spawnRate = 1.5f;
         }
         {
             //Debug.Log("Time left to spawn" + spawnRate);
@@ -66,7 +66,7 @@ public class EnemyManager : MonoBehaviour
         audioComp.Play();
         spawnRate = 10.0f;
         currEnemyQuantity = 0;
-        maxEnemiesRound += 3;
+        maxEnemiesRound += 6;
         enemiesKilled = 0;
         uiManager.NewRound(round);
     }

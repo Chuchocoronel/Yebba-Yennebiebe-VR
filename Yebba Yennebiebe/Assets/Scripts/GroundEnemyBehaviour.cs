@@ -27,6 +27,14 @@ public class GroundEnemyBehaviour : MonoBehaviour
 
     public AudioSource source;
 
+    public float life = 10.0f;
+
+    private bool iceStun;
+    private float iceCooldown = 2.0f;
+
+    private float fireCooldown = 2.0f;
+    private bool fireStun;
+
     // Start is called before the first frame update
     public void Start()
     {
@@ -87,6 +95,27 @@ public class GroundEnemyBehaviour : MonoBehaviour
         
         attackCooldown -= Time.deltaTime;
 
+        if (iceStun)
+        {
+            iceCooldown -= Time.deltaTime;
+            if (iceCooldown <= 0.0f)
+            {
+                iceCooldown = 2.0f;
+                iceStun = false;
+                GetComponent<NavMeshAgent>().speed = 6.0f;
+            }
+        }
+
+        if (fireStun)
+        {
+            fireCooldown -= Time.deltaTime;
+            life -= Time.deltaTime * 0.25f;
+            if (fireCooldown <= 0.0f)
+            {
+                fireCooldown = 2.0f;
+                fireStun = false;
+            }
+        }
         //Uncomment this to kill enemies in 4 s
         //if (!dead)
         //{
@@ -95,15 +124,38 @@ public class GroundEnemyBehaviour : MonoBehaviour
         //}
     }
 
-    public void Die()
+    public void Die(string type)
     {
         if (dead) return;
 
-        source.Play();
-        movement.dead = true;
-        anim.SetTrigger("Dead");
-        GetComponent<BoxCollider>().enabled = false;
-        dead = true;
-        manager.EnemyKilled();
+        switch(type)
+        {
+            case "Fire":
+                fireStun = true;
+                life -= 4.0f;
+                break;
+            case "Ice":
+                GetComponent<NavMeshAgent>().speed = 2.5f;
+                iceStun = true;
+                life -= 2.5f;
+                break;
+            case "Electric":
+                GetComponent<EnemyMovement>().stunned = true;
+                life -= 1.0f;
+                break;
+            case "Default":
+                life -= 1000.0f;
+                break;
+        }
+
+        if (life <= 0.0f)
+        {
+            source.Play();
+            movement.dead = true;
+            anim.SetTrigger("Dead");
+            GetComponent<BoxCollider>().enabled = false;
+            dead = true;
+            manager.EnemyKilled();
+        }
     }
 }

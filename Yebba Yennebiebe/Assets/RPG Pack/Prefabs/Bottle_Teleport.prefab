@@ -9712,7 +9712,7 @@ GameObject:
   - component: {fileID: 6668021448481007063}
   m_Layer: 0
   m_Name: Bottle_Teleport
-  m_TagString: Teleport
+  m_TagString: Juggernaut
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

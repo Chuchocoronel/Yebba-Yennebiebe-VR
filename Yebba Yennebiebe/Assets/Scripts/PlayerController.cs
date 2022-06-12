@@ -292,7 +292,9 @@ public class PlayerController : MonoBehaviour
         {
             Debug.Log("Juggernaut");
             maxHitPoints = 5.0f;
+            hitPoints = 5.0f;
             juggernautActive = true;
+            juggernautBonusTimer = 30.0f;
             Destroy(other.gameObject);
         }
         if (other.tag == "DoubleTap")
@@ -300,29 +302,18 @@ public class PlayerController : MonoBehaviour
             Debug.Log("Double Tap");
             doubleTapActive = true;
             doubleTap = true;
+            doubleTapBonusTimer = 30.0f;
             Destroy(other.gameObject);
         }
         if (other.tag == "Teleport")
         {
-            Debug.Log("Teleport Fast");
-            teleportActive = true;
-            teleportCooldown = 7.5f;
-            if (teleportBonusTimer == 30.0f)
-                teleportBonusTimer = 7.5f;
+            GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+            for (int i = 0; i < enemies.Length; ++i)
+            {
+                enemies[i].GetComponent<GroundEnemyBehaviour>().Die("Default");
+            }
             Destroy(other.gameObject);
         }
-        //    if (other.name == "FireGem_Spawner")
-        //    {
-        //        GripButton(MagicType.FIRE);
-        //    }
-        //    else if (other.name == "WaterGem_Spawner")
-        //    {
-        //        GripButton(MagicType.WATER);
-        //    }
-        //    else if (other.name == "ElectricGem_Spawner")
-        //    {
-        //        GripButton(MagicType.ELECTRIC);
-        //    }
     }
 
     public void GetHurt(float damage)
@@ -335,7 +326,7 @@ public class PlayerController : MonoBehaviour
         {
             source.clip = hurtSounds[2];
             source.Play();
-            //playerScript.PlayerDead();
+            PlayerDead();
         }
     }
 }

@@ -14559,3 +14559,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawn: 1
+  deadParticle: {fileID: 0}

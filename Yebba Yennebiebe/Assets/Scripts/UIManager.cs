@@ -174,37 +174,37 @@ public class UIManager : MonoBehaviour
             }
         }
 
-        if (playerController.teleportActive)
-        {
-            int index = 2;
+        //if (playerController.teleportActive)
+        //{
+        //    int index = 2;
 
-            color = cooldownText[index].color;
-            color.a = 1.0f;
-            cooldownText[index].color = color;
-            cooldownText[index].text = ((int)playerController.teleportBonusTimer).ToString() + "s";
+        //    color = cooldownText[index].color;
+        //    color.a = 1.0f;
+        //    cooldownText[index].color = color;
+        //    cooldownText[index].text = ((int)playerController.teleportBonusTimer).ToString() + "s";
 
-            color = background[index].color;
-            color.a = 1.0f;
-            background[index].color = color;
+        //    color = background[index].color;
+        //    color.a = 1.0f;
+        //    background[index].color = color;
 
-            color = icon[index].color;
-            color.a = 1.0f;
-            icon[index].color = color;
+        //    color = icon[index].color;
+        //    color.a = 1.0f;
+        //    icon[index].color = color;
 
-            if (playerController.teleportBonusTimer <= 0)
-            {
-                color = cooldownText[index].color;
-                color.a = 0.0f;
-                cooldownText[index].color = color;
+        //    if (playerController.teleportBonusTimer <= 0)
+        //    {
+        //        color = cooldownText[index].color;
+        //        color.a = 0.0f;
+        //        cooldownText[index].color = color;
 
-                color = background[index].color;
-                color.a = 0.0f;
-                background[index].color = color;
+        //        color = background[index].color;
+        //        color.a = 0.0f;
+        //        background[index].color = color;
 
-                color = icon[index].color;
-                color.a = 0.0f;
-                icon[index].color = color;
-            }
-        }
+        //        color = icon[index].color;
+        //        color.a = 0.0f;
+        //        icon[index].color = color;
+        //    }
+        //}
     }
 }

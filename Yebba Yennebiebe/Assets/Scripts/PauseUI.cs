@@ -15,6 +15,7 @@ public class PauseUI : MonoBehaviour
     void Start()
     {
         background.gameObject.SetActive(false);
+        Time.timeScale = 1.0f;
 
         List<InputDevice> leftGameControllers = new List<InputDevice>();
         InputDeviceCharacteristics leftCharacteristics = InputDeviceCharacteristics.Left | InputDeviceCharacteristics.Controller;
@@ -35,5 +36,11 @@ public class PauseUI : MonoBehaviour
             background.gameObject.SetActive(true);
             pointsText.text = "Total Points: " + ScorePoints.totalPoints;
         }
+    }
+
+    public void ResumeGame()
+    {
+        Time.timeScale = 1.0f;
+        background.gameObject.SetActive(false);
     }
 }

@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: -6578481740840864103}
   m_Layer: 7
   m_Name: FX_BulletTrail_Red
-  m_TagString: Untagged
+  m_TagString: Fire
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

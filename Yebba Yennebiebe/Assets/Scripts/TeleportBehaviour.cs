@@ -15,7 +15,7 @@ public class TeleportBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if ((player.transform.position - particles.transform.position).magnitude <= 2)
+        if ((player.transform.position - particles.transform.position).magnitude <= 5.0f)
         {
             //particles.Play();
             particles.Clear();
