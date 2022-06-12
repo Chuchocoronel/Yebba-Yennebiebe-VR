@@ -25,7 +25,7 @@ public class PauseUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Vector3 vec = new Vector3(player.transform.position.x + 15, player.transform.position.y + 3, player.transform.position.z);
+        Vector3 vec = new Vector3(player.transform.position.x + 15, player.transform.position.y + 4, player.transform.position.z);
         gameObject.transform.localPosition = vec;
 
         leftDevice.IsPressed(InputHelpers.Button.MenuButton, out bool isPressed);

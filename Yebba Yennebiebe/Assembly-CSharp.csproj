@@ -71,6 +71,7 @@
     <Compile Include="Assets\_Course Library\Scripts\Controls\XRJoystick.cs" />
     <Compile Include="Assets\JMO Assets\Cartoon FX\Scripts\CFX_AutoRotate.cs" />
     <Compile Include="Assets\_Course Library\Scripts\Actions\RotateObject.cs" />
+    <Compile Include="Assets\Scripts\LoseUI.cs" />
     <Compile Include="Assets\_Course Library\Scripts\Actions\MoveWithVelocity.cs" />
     <Compile Include="Assets\_Course Library\Scripts\Actions\VibrateController.cs" />
     <Compile Include="Assets\_Course Library\Scripts\Actions\TeleportPlayer.cs" />
@@ -95,6 +96,7 @@
     <Compile Include="Assets\_Course Library\Scripts\Actions\SpawnObject.cs" />
     <Compile Include="Assets\JMO Assets\Cartoon FX\Scripts\CFX_AutoDestructShuriken.cs" />
     <Compile Include="Assets\_Course Library\Scripts\Actions\CreateTrail.cs" />
+    <Compile Include="Assets\Scripts\PauseUI.cs" />
     <Compile Include="Assets\_Course Library\Scripts\Conditions\OnTilt.cs" />
     <Compile Include="Assets\Scripts\BulletBehaviour.cs" />
     <Compile Include="Assets\_Course Library\Scripts\Actions\SetMaterialColor.cs" />
@@ -122,6 +124,7 @@
     <Compile Include="Assets\_Course Library\Scripts\Actions\SetInteractionLayer.cs" />
     <Compile Include="Assets\_Course Library\Scripts\Actions\TranslateObject.cs" />
     <Compile Include="Assets\_Course Library\Scripts\Actions\ToggleRay.cs" />
+    <Compile Include="Assets\Scripts\ScorePoints.cs" />
     <Compile Include="Assets\_Course Library\Scripts\Controls\XRKnob.cs" />
     <Compile Include="Assets\Scripts\GemBehaviour.cs" />
     <Compile Include="Assets\_Course Library\Scripts\Actions\PlayVideo.cs" />
@@ -135,9 +138,6 @@
     <Compile Include="Assets\_Course Library\Scripts\Actions\LaunchProjectile.cs" />
     <Compile Include="Assets\_Course Library\Scripts\Conditions\OnVelocity.cs" />
     <Compile Include="Assets\_Course Library\Scripts\Actions\DestroyObject.cs" />
-    <Compile Include="Assets\Scripts\ScorePoints.cs" />
-    <Compile Include="Assets\Scripts\LoseUI.cs" />
-    <Compile Include="Assets\Scripts\PauseUI.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
